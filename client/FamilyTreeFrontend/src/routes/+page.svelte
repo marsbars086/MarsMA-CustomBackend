@@ -20,6 +20,13 @@
       getFamilies();
     });
 
+    const deleteFamily = async (lastname) => {
+    const res = await fetch(`http://localhost:3000/deleteFamily/${lastname}`, {
+      method: 'DELETE',
+    });
+    getFamilies()
+  }
+
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -36,7 +43,7 @@
 <details open>
     <summary> 
       {item.last_name} Family 
-      <button>Delete</button>
+      <button onclick={()=> deleteFamily(item.last_name)}>Delete</button>
     </summary>
     <li>{item.culture} </li>
     <li>members within </li>
