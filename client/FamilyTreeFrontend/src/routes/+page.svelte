@@ -31,6 +31,35 @@
 {/each}
 
 <h1>Families</h1>
+<div class = "DisplayFamilyContainers" >
 {#each families as item}
-<li>{item.last_name} - {item.culture} </li>
+<details open>
+    <summary> 
+      {item.last_name} Family 
+      <button>Delete</button>
+    </summary>
+    <li>{item.culture} </li>
+    <li>members within </li>
+</details>
 {/each}
+</div>
+
+<style>
+  details {
+  /* padding: 10px; */
+  margin:10px;
+  background-color: #bcc0c3;
+  border-radius: 5pxrgb(186, 198, 207)}
+
+summary {
+  background-color: #0b0d0f;
+  color: white;
+  padding: 10px;
+}
+.DisplayFamilyContainers {
+  display:flex; 
+        flex-direction:row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+}
+</style>
