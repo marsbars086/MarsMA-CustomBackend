@@ -72,8 +72,14 @@
     </summary>
     <li>{item.culture} </li>
     <li>members within </li>
+    <li>Members:</li>
+<ul>
+  {#each item.members as member}
+    <li>{member.first_name}</li>
+  {/each}
+</ul>
 </details>
-<p>hello {item.members.first_name}</p>
+
 {/each}
 </div>
 
