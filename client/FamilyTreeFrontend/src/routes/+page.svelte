@@ -6,13 +6,11 @@
     const getPeople = async () => {
       const res = await fetch('http://localhost:3000/People');
       people = await res.json();
-      console.log(people)
     };
 
     const getFamilies = async () => {
         const res = await fetch('http://localhost:3000/Families')
         families = await res.json();
-        console.log(families)
     }
 
     onMount(() => {
@@ -27,6 +25,32 @@
     getFamilies()
   }
 
+  let newFamily = $state(
+        {name: "", culture: ""}
+    );
+
+  // const addNewFamily = async (name, culture) => {
+  //   const res = await fetch(`http://localhost:3000/CreateFamily/${name},/${culture}` {
+  //     method: 'POST',
+  //   });
+  //   const data = await res.json();
+  //   console.log(data);
+  //   getNuevans();
+  //   };
+
+  const addNewFamily = async (name, culture) => {
+    console.log(newFamily)
+    console.log(name)
+    console.log(culture)
+    const res = await fetch(`http://localhost:3000/CreateFamily/${name}/${culture}`, {
+      method: 'POST',
+    });
+
+    const result = await res.json();
+    console.log(result);
+    getFamilies();
+  };
+
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -38,6 +62,7 @@
 {/each}
 
 <h1>Families</h1>
+<button onclick={()=> console.log($state.snapshot(families))}>click me</button>
 <div class = "DisplayFamilyContainers" >
 {#each families as item}
 <details open>
@@ -48,8 +73,14 @@
     <li>{item.culture} </li>
     <li>members within </li>
 </details>
+<p>hello {item.members.first_name}</p>
 {/each}
 </div>
+
+<h1>add new family</h1>
+<input bind:value={newFamily.name} placeholder="Resser"/>
+<input bind:value={newFamily.culture} placeholder="African"/>
+<button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
 
 <style>
   details {
