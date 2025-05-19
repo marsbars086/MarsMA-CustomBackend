@@ -32,7 +32,8 @@ router.get('/People', (req, res) => {
 
 router.get('/Families' , (req, res) => {
   FamilySchema.find({})
-  .populate('members','first_name')
+  // .populate('members','first_name')
+  .populate('members')
   .then(families => {
     console.log("got families")
     console.log(families)

@@ -75,7 +75,7 @@
     <li>Members:</li>
 <ul>
   {#each item.members as member}
-    <li>{member.first_name}</li>
+    <li>{member.gender}</li>
   {/each}
 </ul>
 </details>
