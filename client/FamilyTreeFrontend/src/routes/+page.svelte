@@ -118,6 +118,7 @@
   /* padding: 10px; */
   margin:10px;
   background-color: #bcc0c3;
+  width:310px;
   border-radius: 5pxrgb(186, 198, 207)}
 
 summary {
@@ -136,6 +137,8 @@ summary {
   display:flex; 
         flex-direction:row;
         flex-wrap: wrap;
+        justify-content: space-between;
+        justify-content: center;
 }
 .IconforMember{
 		font-size:1em;
