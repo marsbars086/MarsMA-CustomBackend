@@ -87,46 +87,71 @@ router.get('/family/:id', (req, res) => {
 //   })
 // })
 
-// POST /CreatePersonByFamilyName/:firstname/:lastname/:familyname/:age
-router.post("/CreatePerson/:firstname/:lastname/:familyname/:age", (req, res) => {
-  // First, find the family by last_name
+// // POST /CreatePersonByFamilyName/:firstname/:lastname/:familyname/:age
+// router.post("/CreatePerson/:firstname/:lastname/:familyname/:age", (req, res) => {
+//   // First, find the family by last_name
+//   FamilySchema.findOne({ last_name: req.params.familyname })
+//     .then(family => {
+//       if (!family) {
+//         res.status(404).json({ error: "Family not found" });
+//         //or create the family here
+//       } else {
+//         // Create a new person with the found family's ID
+//           PersonSchema.create({
+//           first_name: req.params.firstname,
+//           last_name: req.params.lastname,
+//           age: req.params.age,
+//           family: family._id
+//         }).then(newPerson => {
+//           // Push the new person into the family's members array
+//           // console.log(newPerson.first_name)
+//           // family.members.push({
+//           //   first_name: newPerson.first_name,
+//           // });
+//           family.members.push(newPerson)
+//           family.save();
+
+//           console.log("Created person and added to family:");
+//           console.log(newPerson);
+//           res.send(newPerson);
+//         }).catch(err => {
+//           console.error("Error creating person", err);
+//           res.json(err);
+//         });
+//       }
+//     })
+//     .catch(err => {
+//       console.error("Error finding family", err);
+//       res.json(err);
+//     });
+// });
+
+router.post("/createpersonbody/:familyname",(req, res) => {
   FamilySchema.findOne({ last_name: req.params.familyname })
-    .then(family => {
-      if (!family) {
-        res.status(404).json({ error: "Family not found" });
-        //or create the family here
-      } else {
-        // Create a new person with the found family's ID
-          PersonSchema.create({
-          first_name: req.params.firstname,
-          last_name: req.params.lastname,
-          age: req.params.age,
-          family: family._id
-        }).then(newPerson => {
-          // Push the new person into the family's members array
-          // console.log(newPerson.first_name)
-          // family.members.push({
-          //   first_name: newPerson.first_name,
-          // });
-          family.members.push(newPerson)
-          family.save();
+  .then(family => {
+    if (!family) {
+      res.status(404).json({ error: "Family not found" });
+      //or create the family here
+    } else {
+      PersonSchema.create(req.body)
+      .then(newPerson => {
+        family.members.push(newPerson)
+        family.save();
 
-          console.log("Created person and added to family:");
-          console.log(newPerson);
-          res.send(newPerson);
-        }).catch(err => {
-          console.error("Error creating person", err);
-          res.json(err);
-        });
-      }
-    })
-    .catch(err => {
-      console.error("Error finding family", err);
-      res.json(err);
-    });
+        console.log("Created person and added to family:");
+        console.log(newPerson);
+        res.send(newPerson);
+      }).catch(err => {
+        console.error("Error creating person", err);
+        res.json(err);
+      });
+    }
+  })
+  .catch(err => {
+    console.error("Error finding family", err);
+    res.json(err);
+  });
 });
-
-
 
 router.post("/CreateFamily/:lastname/:culture", (req, res) => {
   FamilySchema.create({
