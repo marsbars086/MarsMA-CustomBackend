@@ -90,7 +90,7 @@
 <ul>
   <div class="MemberinFamilyDisplay">
   {#each item.members as member}
-    <button class="IconforMember" onclick={()=>console.log('hi')}>{member.first_name}</button>
+    <button class="IconforMember" onclick={()=>console.log($state.snapshot(member))}>{member.first_name}</button>
     <!-- <label for button>{member.first_name}</label> -->
   {/each}
 </div>
