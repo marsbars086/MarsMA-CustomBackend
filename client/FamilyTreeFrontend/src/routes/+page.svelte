@@ -1,4 +1,5 @@
 <script>
+    import { STATES } from 'mongoose';
     import { onMount } from 'svelte';
     let people = $state([]);
     let families = $state([]);
@@ -29,14 +30,11 @@
         {name: "", culture: ""}
     );
 
-  // const addNewFamily = async (name, culture) => {
-  //   const res = await fetch(`http://localhost:3000/CreateFamily/${name},/${culture}` {
-  //     method: 'POST',
-  //   });
-  //   const data = await res.json();
-  //   console.log(data);
-  //   getNuevans();
-  //   };
+  let newPerson = $state(
+    {first_name:"", last_name:"",age:0}
+  )
+
+  let personsFamilyname = $state("")
 
   const addNewFamily = async (name, culture) => {
     console.log(newFamily)
@@ -48,6 +46,23 @@
 
     const result = await res.json();
     console.log(result);
+    getFamilies();
+  };
+
+  const addNewPerson = async (familyname) => {
+    console.log(familyname)
+    console.log($state.snapshot(newPerson))
+    const res = await fetch(`http://localhost:3000/createpersonbody/${familyname}`, {
+      method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newPerson)
+    });
+
+    const result = await res.json();
+    console.log(result);
+    getPeople();
     getFamilies();
   };
 
@@ -89,6 +104,14 @@
 <input bind:value={newFamily.name} placeholder="Resser"/>
 <input bind:value={newFamily.culture} placeholder="African"/>
 <button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
+
+<h1>add new person</h1>
+<input bind:value={newPerson.first_name} placeholder="Hayes"/>
+<input bind:value={newPerson.last_name} placeholder="Resser"/>
+<input bind:value={personsFamilyname} placeholder="Resser"/>
+<input type="number" bind:value={newPerson.age}/>
+
+<button onclick={()=>addNewPerson(personsFamilyname)}>submit</button>
 
 <style>
   details {
