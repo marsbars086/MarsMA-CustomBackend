@@ -17,7 +17,7 @@ const FamilySchema = require('../models/Family.js')
 //       console.error(err)
 //     })
 // })
-
+//typicalling lower case
 router.get('/People', (req, res) => {
   PersonSchema.find({})
     .populate('family','last_name culture') // <-- This is the important part
@@ -94,6 +94,7 @@ router.post("/CreatePerson/:firstname/:lastname/:familyname/:age", (req, res) =>
     .then(family => {
       if (!family) {
         res.status(404).json({ error: "Family not found" });
+        //or create the family here
       } else {
         // Create a new person with the found family's ID
           PersonSchema.create({
@@ -139,7 +140,7 @@ router.post("/CreateFamily/:lastname/:culture", (req, res) => {
     res.json(err)
   })
 })
-
+//have this be body also
 router.put('/updateFamily/:last_name/:field/:newValue', (req, res) => {
   const { field, last_name, newValue } = req.params;
   console.log(field)
