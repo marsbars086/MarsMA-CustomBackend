@@ -71,12 +71,14 @@
       <button onclick={()=> deleteFamily(item.last_name)}>Delete</button>
     </summary>
     <li>{item.culture} </li>
-    <li>members within </li>
     <li>Members:</li>
 <ul>
+  <div class="MemberinFamilyDisplay">
   {#each item.members as member}
-    <li>{member.gender}</li>
+    <button class="IconforMember" onclick={()=>console.log('hi')}>{member.first_name}</button>
+    <!-- <label for button>{member.first_name}</label> -->
   {/each}
+</div>
 </ul>
 </details>
 
@@ -99,11 +101,35 @@ summary {
   background-color: #0b0d0f;
   color: white;
   padding: 10px;
+  width:300px;
 }
 .DisplayFamilyContainers {
   display:flex; 
         flex-direction:row;
         flex-wrap: wrap;
         justify-content: space-between;
+}
+.MemberinFamilyDisplay {
+  display:flex; 
+        flex-direction:row;
+        flex-wrap: wrap;
+}
+.IconforMember{
+		font-size:1em;
+		padding:0.1em;
+    border-radius: 50%;
+    background-color: #48abe0;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 31px;
+  height: 80px;
+  width: 80px;
+  margin: 5px;
+  /* box-shadow: 0 2px 4px darkslategray; */
+  transition: box-shadow 0.3s ease;
+}
+.IconforMember:hover{
+  box-shadow: 10px 10px 20px rgba(36, 36, 36,0.5);
 }
 </style>
