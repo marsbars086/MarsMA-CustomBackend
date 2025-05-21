@@ -98,7 +98,7 @@ function closeModal() {
 
 
 
-
+<!-- <div class="layout-container"> -->
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 
@@ -155,22 +155,17 @@ function closeModal() {
 <Sidebar 
   show={sidebar_show} 
   person={selectedPerson} 
-  close={() => sidebar_show = false} />
+  close={() => sidebar_show = false} 
+/>
 
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- </div> -->
 
 <style>
+
+/* .layout-container {
+  display: flex;
+} */
+
   details {
   /* padding: 10px; */
   margin:10px;

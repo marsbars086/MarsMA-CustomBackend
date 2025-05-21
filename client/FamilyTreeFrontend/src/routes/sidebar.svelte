@@ -25,6 +25,7 @@ import { fly } from 'svelte/transition';
     <h2>{person.first_name} {person.last_name}</h2>
     <p><strong>Age:</strong> {person.age}</p>
     <p><strong>Family:</strong> {person.family}</p>
+    <p><strong>Gender:</strong> {person.gender}</p>
   {:else}
     <p>Loading person details...</p>
   {/if}
@@ -41,6 +42,6 @@ nav {
   border-left: 1px solid #aaa;
   background: #fff;
   overflow-y: auto;
-	width: 10rem;
+	width: 20rem;
 }
 </style>
