@@ -1,6 +1,7 @@
 <script>
     import { STATES } from 'mongoose';
     import { onMount } from 'svelte';
+    import Sidepanel from './sidebar.svelte';
     let people = $state([]);
     let families = $state([]);
 
@@ -64,7 +65,21 @@
     console.log(result);
     getPeople();
     getFamilies();
+
+
+  let selectedPerson = null;
+
+function openModal(person) {
+  selectedPerson = person;
+}
+
+function closeModal() {
+  selectedPerson = null;
+}
   };
+
+  import Sidebar from './Sidebar.svelte';
+  let sidebar_show = $state(false);
 
 </script>
 
@@ -90,7 +105,7 @@
 <ul>
   <div class="MemberinFamilyDisplay">
   {#each item.members as member}
-    <button class="IconforMember" onclick={()=>console.log($state.snapshot(member))}>{member.first_name}</button>
+    <button class="IconforMember" onclick={()=>openModal(member)}>{member.first_name}</button>
     <!-- <label for button>{member.first_name}</label> -->
   {/each}
 </div>
@@ -112,6 +127,14 @@
 <input type="number" bind:value={newPerson.age}/>
 
 <button onclick={()=>addNewPerson(personsFamilyname)}>submit</button>
+
+<!-- {#if selectedPerson}
+  <Sidepanel person={selectedPerson} onClose={closeModal} />
+{/if} -->
+
+<button onclick={() => sidebar_show = !sidebar_show}>Toggle Sidebar</button>
+
+<Sidebar bind:show={sidebar_show} />
 
 <style>
   details {
