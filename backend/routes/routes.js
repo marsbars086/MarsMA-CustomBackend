@@ -20,7 +20,7 @@ const FamilySchema = require('../models/Family.js')
 //typicalling lower case
 router.get('/People', (req, res) => {
   PersonSchema.find({})
-    .populate('family','last_name culture') // <-- This is the important part
+    .populate('family') // <-- This is the important part
     .then(people => {
       console.log("Successfully got people!");
       res.json(people);
@@ -133,7 +133,11 @@ router.post("/createpersonbody/:familyname",(req, res) => {
       res.status(404).json({ error: "Family not found" });
       //or create the family here
     } else {
-      PersonSchema.create(req.body)
+      const personData = {
+        ...req.body,
+        family: family._id
+      };
+      PersonSchema.create(personData)
       .then(newPerson => {
         family.members.push(newPerson)
         family.save();
