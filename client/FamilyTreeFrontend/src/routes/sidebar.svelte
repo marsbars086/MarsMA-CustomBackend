@@ -12,6 +12,7 @@ import { fly } from 'svelte/transition';
 // export let close;
 
   function handleClose() {
+    console.log("hello?")
     close();
   }
 </script>
@@ -19,7 +20,7 @@ import { fly } from 'svelte/transition';
 {#if show}
 
   <nav transition:fly={{x: 250, opacity: 1}}>
-    <button onclick={() => {close}}>Hello</button>
+    <button onclick={() => handleClose()}>close</button>
     {#if person}
     <h2>{person.first_name} {person.last_name}</h2>
     <p><strong>Age:</strong> {person.age}</p>

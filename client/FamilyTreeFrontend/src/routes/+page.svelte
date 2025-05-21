@@ -152,7 +152,11 @@ function closeModal() {
 
 <!-- <Sidebar bind:show={sidebar_show} /> -->
 
-<Sidebar show={sidebar_show} person={selectedPerson} on:close={() => sidebar_show = false} />
+<Sidebar 
+  show={sidebar_show} 
+  person={selectedPerson} 
+  close={() => sidebar_show = false} />
+
 
 
 
