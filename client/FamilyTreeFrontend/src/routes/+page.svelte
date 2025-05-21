@@ -80,8 +80,24 @@ function closeModal() {
 
   import Sidebar from './Sidebar.svelte';
   let sidebar_show = $state(false);
+  let selectedPerson = $state(null);
 
+  function openSidebar(person) {
+    selectedPerson = person;
+    console.log($state.snapshot(selectedPerson))
+    sidebar_show = true;
+  }
 </script>
+
+
+
+
+
+
+
+
+
+
 
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
@@ -105,7 +121,7 @@ function closeModal() {
 <ul>
   <div class="MemberinFamilyDisplay">
   {#each item.members as member}
-    <button class="IconforMember" onclick={()=>openModal(member)}>{member.first_name}</button>
+    <button class="IconforMember" onclick={() => openSidebar(member)}>{member.first_name}</button>
     <!-- <label for button>{member.first_name}</label> -->
   {/each}
 </div>
@@ -132,9 +148,23 @@ function closeModal() {
   <Sidepanel person={selectedPerson} onClose={closeModal} />
 {/if} -->
 
-<button onclick={() => sidebar_show = !sidebar_show}>Toggle Sidebar</button>
+<button onclick={() => openSidebar(member)}>Toggle Sidebar</button>
 
-<Sidebar bind:show={sidebar_show} />
+<!-- <Sidebar bind:show={sidebar_show} /> -->
+
+<Sidebar show={sidebar_show} person={selectedPerson} on:close={() => sidebar_show = false} />
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
   details {

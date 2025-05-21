@@ -1,8 +1,4 @@
-{#if show}
-  <nav transition:fly={{x: 250, opacity: 1}}>
-    <button on:click={() => {modal_show = true; show = false;}}>Hello</button>
-  </nav>
-{/if}
+
 
 <!-- <Modal bind:show={modal_show} /> -->
 
@@ -10,10 +6,30 @@
 import { fly } from 'svelte/transition';
 // import Modal from './Modal.svelte';
 
-export let show = false;
-let modal_show = false;
+ let {show, person, close} = $props();
+  
+//  let {person} = $props();
+// export let close;
+
+  function handleClose() {
+    close();
+  }
 </script>
 		
+{#if show}
+
+  <nav transition:fly={{x: 250, opacity: 1}}>
+    <button onclick={() => {close}}>Hello</button>
+    {#if person}
+    <h2>{person.first_name} {person.last_name}</h2>
+    <p><strong>Age:</strong> {person.age}</p>
+    <p><strong>Family:</strong> {person.family}</p>
+  {:else}
+    <p>Loading person details...</p>
+  {/if}
+  </nav>
+{/if}
+
 <style>
 nav {
   position: fixed;
