@@ -34,7 +34,7 @@ import { fly } from 'svelte/transition';
 
 <style>
 nav {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   right: 0;
   height: 100%;
@@ -42,6 +42,6 @@ nav {
   border-left: 1px solid #aaa;
   background: #fff;
   overflow-y: auto;
-	width: 20rem;
+	width: 40rem;
 }
 </style>

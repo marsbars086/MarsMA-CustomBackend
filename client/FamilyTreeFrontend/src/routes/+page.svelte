@@ -109,7 +109,8 @@ function closeModal() {
 
 <h1>Families</h1>
 <button onclick={()=> console.log($state.snapshot(families))}>click me</button>
-<div class = "DisplayFamilyContainers" >
+<div class="MainFamilyDisplay">
+<div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
 {#each families as item}
 <details open>
     <summary> 
@@ -129,8 +130,16 @@ function closeModal() {
 </details>
 
 {/each}
+
 </div>
 
+<Sidebar 
+  show={sidebar_show} 
+  person={selectedPerson} 
+  close={() => sidebar_show = false} 
+/>
+
+</div>
 <h1>add new family</h1>
 <input bind:value={newFamily.name} placeholder="Resser"/>
 <input bind:value={newFamily.culture} placeholder="African"/>
@@ -152,11 +161,7 @@ function closeModal() {
 
 <!-- <Sidebar bind:show={sidebar_show} /> -->
 
-<Sidebar 
-  show={sidebar_show} 
-  person={selectedPerson} 
-  close={() => sidebar_show = false} 
-/>
+
 
 <!-- </div> -->
 
@@ -179,11 +184,20 @@ summary {
   padding: 10px;
   width:300px;
 }
+.MainFamilyDisplay{
+  display: flex;
+  flex-direction: row; /* important */
+  flex-wrap: nowrap;   /* prevent stacking */
+}
 .DisplayFamilyContainers {
   display:flex; 
         flex-direction:row;
         flex-wrap: wrap;
         justify-content: space-between;
+  /* margin-right: 800px; */
+}
+.DisplayFamilyContainers.with-sidebar {
+  margin-right: 2rem;
 }
 .MemberinFamilyDisplay {
   display:flex; 
