@@ -108,7 +108,12 @@ function closeModal() {
 {/each}
 
 <h1>Families</h1>
-<button onclick={()=> console.log($state.snapshot(families))}>click me</button>
+
+<h1>add new family</h1>
+<input bind:value={newFamily.name} placeholder="Resser"/>
+<input bind:value={newFamily.culture} placeholder="African"/>
+<button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
+
 <div class="MainFamilyDisplay">
 <div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
 {#each families as item}
@@ -140,10 +145,7 @@ function closeModal() {
 />
 
 </div>
-<h1>add new family</h1>
-<input bind:value={newFamily.name} placeholder="Resser"/>
-<input bind:value={newFamily.culture} placeholder="African"/>
-<button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
+
 
 <h1>add new person</h1>
 <input bind:value={newPerson.first_name} placeholder="Hayes"/>
