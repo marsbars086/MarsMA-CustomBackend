@@ -175,14 +175,14 @@ function closeModal() {
   /* padding: 10px; */
   margin:10px;
   background-color: #bcc0c3;
-  width:310px;
+  width:400px;
   border-radius: 5pxrgb(186, 198, 207)}
 
 summary {
   background-color: #0b0d0f;
   color: white;
   padding: 10px;
-  width:300px;
+  width:380px;
 }
 .MainFamilyDisplay{
   display: flex;
@@ -207,14 +207,15 @@ summary {
         justify-content: center;
 }
 .IconforMember{
-		font-size:1em;
+		/* font-size:1em; */
+    font-size: clamp(1.5rem, 1.9vw, 2.2rem);
 		padding:0.1em;
     border-radius: 50%;
     background-color: #48abe0;
   color: white;
   border: none;
   padding: 5px;
-  font-size: 31px;
+  /* font-size: 31px; */
   height: 80px;
   width: 80px;
   margin: 5px;
