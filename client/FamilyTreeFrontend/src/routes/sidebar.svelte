@@ -15,6 +15,15 @@ import { fly } from 'svelte/transition';
     console.log("hello?")
     close();
   }
+
+  const deletePerson = async (id) => {
+    console.log('hii')
+    console.log(id)
+    const res = await fetch(`http://localhost:3000/deletePerson/${id}`, {
+      method: 'DELETE',
+    });
+    close();
+  }
 </script>
 		
 {#if show}
@@ -26,6 +35,10 @@ import { fly } from 'svelte/transition';
     <p><strong>Age:</strong> {person.age}</p>
     <p><strong>Family:</strong> {person.family}</p>
     <p><strong>Gender:</strong> {person.gender}</p>
+    <p><strong>ID:</strong> {person._id}</p>
+    <button onclick={() => deletePerson(person._id)}>delete</button>
+
+
   {:else}
     <p>Loading person details...</p>
   {/if}
