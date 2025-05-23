@@ -2,6 +2,9 @@
     import { STATES } from 'mongoose';
     import { onMount } from 'svelte';
     import Sidepanel from './sidebar.svelte';
+    import { Modals } from 'svelte-modals';
+    import {modals} from 'svelte-modals';
+    import MyModal from './MyModal.svelte';
     let people = $state([]);
     let families = $state([]);
 
@@ -87,6 +90,10 @@ function closeModal() {
     console.log($state.snapshot(selectedPerson))
     sidebar_show = true;
   }
+
+  function handleModalClick() {
+    modals.open(MyModal, { title: 'UpdateFamily', message: 'This is an alert' })
+  }
 </script>
 
 
@@ -113,7 +120,7 @@ function closeModal() {
 <input bind:value={newFamily.name} placeholder="Resser"/>
 <input bind:value={newFamily.culture} placeholder="African"/>
 <button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
-
+<button onclick={()=> handleModalClick()}>openmodal</button>
 <div class="MainFamilyDisplay">
 <div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
 {#each families as item}
@@ -159,11 +166,15 @@ function closeModal() {
   <Sidepanel person={selectedPerson} onClose={closeModal} />
 {/if} -->
 
-<button onclick={() => openSidebar(member)}>Toggle Sidebar</button>
 
 <!-- <Sidebar bind:show={sidebar_show} /> -->
 
-
+<Modals>
+  <!-- shown when any modal is opened -->
+  {#snippet backdrop({ close })}
+    <div class="backdrop" onclick={() => close()} />
+  {/snippet}
+</Modals>
 
 <!-- </div> -->
 
@@ -227,4 +238,12 @@ summary {
 .IconforMember:hover{
   box-shadow: 10px 10px 20px rgba(36, 36, 36,0.5);
 }
+.backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
 </style>
