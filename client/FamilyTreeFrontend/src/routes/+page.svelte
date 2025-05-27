@@ -91,6 +91,12 @@ function closeModal() {
     sidebar_show = true;
   }
 
+  function closeSidebar() {
+    getFamilies()
+    getPeople()
+    sidebar_show = false
+  }
+
   function handleModalClick() {
     modals.open(MyModal, { title: 'UpdateFamily', message: 'This is an alert' })
   }
@@ -148,7 +154,7 @@ function closeModal() {
 <Sidebar 
   show={sidebar_show} 
   person={selectedPerson} 
-  close={() => sidebar_show = false} 
+  close={() => closeSidebar()} 
 />
 
 </div>
