@@ -170,16 +170,37 @@ router.post("/CreateFamily/:lastname/:culture", (req, res) => {
   })
 })
 //have this be body also
-router.put('/updateFamily/:last_name/:field/:newValue', (req, res) => {
-  const { field, last_name, newValue } = req.params;
-  console.log(field)
-  console.log(last_name)
-  console.log(newValue)
+// router.put('/updateFamily/:last_name/:field/:newValue', (req, res) => {
+//   const { field, last_name, newValue } = req.params;
+//   console.log(field)
+//   console.log(last_name)
+//   console.log(newValue)
 
-  const filter = { last_name: last_name };
-  const update = { [field]: newValue };
+//   const filter = { last_name: last_name };
+//   const update = { [field]: newValue };
 
-  FamilySchema.updateOne(filter,update)
+//   FamilySchema.updateOne(filter,update)
+//   .then(family => {
+//     console.log(family)
+//     res.send(family)
+//   })
+//   .catch(err => {
+//     console.error(err)
+//     res.json(err)
+//     //doesnt work for updating family
+//   })
+// })
+
+router.put('/updatefamilybody/:id' , (req, res) => {
+  const { culture, last_name } = req.body;
+
+  const update = {};
+  if (culture) update.culture = culture;
+  if (last_name) update.last_name = last_name;
+
+  FamilySchema.findByIdAndUpdate(
+    req.params.id, { $set: update }
+  )
   .then(family => {
     console.log(family)
     res.send(family)

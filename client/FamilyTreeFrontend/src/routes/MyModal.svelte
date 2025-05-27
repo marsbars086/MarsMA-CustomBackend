@@ -15,9 +15,21 @@
       {last_name: message.last_name, culture: message.culture}
     );
 
-    function UpdateFamily(){
+    const UpdateFamily = async (familyid) => {
       console.log($state.snapshot(UpdatedFamily))
-    }
+      const res = await fetch(`http://localhost:3000/updatefamilybody/${familyid}`, {
+      method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(UpdatedFamily)
+    });
+
+    const result = await res.json();
+    console.log(result);
+    close()
+
+  };
   </script>
   
   {#if isOpen}
@@ -33,7 +45,7 @@
         <label for input>culture</label>
         <input bind:value={UpdatedFamily.culture}/>
         <div class="actions">
-          <button onclick={() => UpdateFamily()}>Submit</button>
+          <button onclick={() => UpdateFamily(message._id)}>Submit</button>
         </div>
 
       </div>
