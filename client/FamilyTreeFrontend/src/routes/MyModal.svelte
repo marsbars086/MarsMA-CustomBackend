@@ -28,6 +28,27 @@
     const result = await res.json();
     console.log(result);
     close()
+  };
+
+  let newPerson = $state(
+    {first_name:"", last_name:"",age:0}
+  )
+  
+  let personsFamilyname = $state("")
+
+  const addNewPerson = async (familyname) => {
+    console.log(familyname)
+    console.log($state.snapshot(newPerson))
+    const res = await fetch(`http://localhost:3000/createpersonbody/${familyname}`, {
+      method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newPerson)
+    });
+
+    const result = await res.json();
+    console.log(result);
 
   };
   </script>
@@ -54,8 +75,14 @@
     <div role="dialog" class="modal" style="top: {position?.top}px; left: {position?.left}px;">
       <div class="contents">
         <h2>{title}</h2>
-        <p>{message}</p>
-        <p>hi this was randoms</p>
+
+        <input bind:value={newPerson.first_name} placeholder="Hayes"/>
+        <input bind:value={newPerson.last_name} placeholder="Resser"/>
+        <input bind:value={personsFamilyname} placeholder="Resser"/>
+        <input type="number" bind:value={newPerson.age}/>
+
+        <button onclick={()=>addNewPerson(personsFamilyname)}>submit</button>
+
         <div class="actions">
           <button onclick={() => close()}>OK</button>
         </div>

@@ -143,6 +143,7 @@
       <button onclick={(event)=> handleModalClick(event, "Update Family", item)}>...</button>
     </summary>
     <li>{item.culture} </li>
+    <li><button onclick={(event)=> handleModalClick(event, "Create Person", item)}>Add New Member</button></li>
     <li>Members:</li>
 <ul>
   <div class="MemberinFamilyDisplay">
