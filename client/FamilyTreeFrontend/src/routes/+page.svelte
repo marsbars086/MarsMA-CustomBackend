@@ -72,13 +72,13 @@
 
   let selectedPerson = null;
 
-function openModal(person) {
-  selectedPerson = person;
-}
+// function openModal(person) {
+//   selectedPerson = person;
+// }
 
-function closeModal() {
-  selectedPerson = null;
-}
+// function closeModal() {
+//   selectedPerson = null;
+// }
   };
 
   import Sidebar from './Sidebar.svelte';
@@ -97,8 +97,13 @@ function closeModal() {
     sidebar_show = false
   }
 
-  function handleModalClick(mytitle, mymessage) {
-    modals.open(MyModal, { title: mytitle, message: mymessage })
+  function handleModalClick(event, mytitle, mymessage) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const position = {
+      top: rect.top + window.scrollY - 183,
+      left: rect.left + window.scrollX,
+    };
+    modals.open(MyModal, { title: mytitle, message: mymessage , position})
   }
 </script>
 
@@ -126,8 +131,8 @@ function closeModal() {
 <input bind:value={newFamily.name} placeholder="Resser"/>
 <input bind:value={newFamily.culture} placeholder="African"/>
 <button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
-<button onclick={()=> handleModalClick("UpdateFamily", "Hiiii")}>openmodalfamily</button>
-<button onclick={()=> handleModalClick("yo","hii")}>openmodalrandom</button>
+<!-- <button onclick={(event)=> handleModalClick(event, "UpdateFamily", "Hiiii")}>openmodalfamily</button> -->
+<button onclick={(event)=> handleModalClick(event, "yo","hii")}>openmodalrandom</button>
 <div class="MainFamilyDisplay">
 <div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
 {#each families as item}
@@ -135,6 +140,7 @@ function closeModal() {
     <summary> 
       {item.last_name} Family 
       <button onclick={()=> deleteFamily(item.last_name)}>Delete</button>
+      <button onclick={(event)=> handleModalClick(event, "Update Family", item)}>...</button>
     </summary>
     <li>{item.culture} </li>
     <li>Members:</li>
