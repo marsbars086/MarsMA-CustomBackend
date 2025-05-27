@@ -22,8 +22,15 @@
       </div>
     </div>
     {:else}
-    <div class="actions">
-      <button onclick={() => close()}>OK</button>
+    <div role="dialog" class="modal">
+      <div class="contents">
+        <h2>{title}</h2>
+        <p>{message}</p>
+        <p>hi this was randoms</p>
+        <div class="actions">
+          <button onclick={() => close()}>OK</button>
+        </div>
+      </div>
     </div>
     {/if}
 

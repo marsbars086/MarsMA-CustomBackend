@@ -97,8 +97,8 @@ function closeModal() {
     sidebar_show = false
   }
 
-  function handleModalClick() {
-    modals.open(MyModal, { title: 'UpdateFamily', message: 'This is an alert' })
+  function handleModalClick(mytitle, mymessage) {
+    modals.open(MyModal, { title: mytitle, message: mymessage })
   }
 </script>
 
@@ -126,7 +126,8 @@ function closeModal() {
 <input bind:value={newFamily.name} placeholder="Resser"/>
 <input bind:value={newFamily.culture} placeholder="African"/>
 <button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
-<button onclick={()=> handleModalClick()}>openmodal</button>
+<button onclick={()=> handleModalClick("UpdateFamily", "Hiiii")}>openmodalfamily</button>
+<button onclick={()=> handleModalClick("yo","hii")}>openmodalrandom</button>
 <div class="MainFamilyDisplay">
 <div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
 {#each families as item}
