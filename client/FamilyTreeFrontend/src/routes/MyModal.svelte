@@ -3,6 +3,7 @@
       // provided by <Modals />
       isOpen,
       close,
+      customclose,
 
   
       // your props
@@ -27,7 +28,7 @@
 
     const result = await res.json();
     console.log(result);
-    close()
+    customclose()
   };
 
   const deleteFamily = async (lastname) => {
@@ -60,6 +61,7 @@
     close()
 
   };
+
   </script>
   
   {#if isOpen}

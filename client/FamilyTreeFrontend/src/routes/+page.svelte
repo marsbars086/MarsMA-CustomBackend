@@ -18,10 +18,17 @@
         families = await res.json();
     }
 
-    onMount(() => {
+
+    function regenerateBackend(){
+      console.log("i regenerated")
       getPeople();
       getFamilies();
+    }
+
+    onMount(() => {
+      regenerateBackend()
     });
+
 
     const promptingdeleteFamily = async (lastname) => {
       modals.open(MyModal, {title:"Are you sure you want to delete this family?", message:lastname})
@@ -89,8 +96,7 @@
   }
 
   function closeSidebar() {
-    getFamilies()
-    getPeople()
+    regenerateBackend()
     sidebar_show = false
   }
 
@@ -100,8 +106,18 @@
       top: rect.top + window.scrollY - 183,
       left: rect.left + window.scrollX,
     };
-    modals.open(MyModal, { title: mytitle, message: mymessage , position})
+    let isModalOpen = (true);
+    modals.open(MyModal, { isOpen: $state.snapshot(isModalOpen), customclose:handleModalClose(), title: mytitle, message: mymessage , position})
   }
+
+  let isModalOpen = $state(false)
+//   const [isModalOpen, setModalOpen] = createSignal(false);
+// // const [modalTitle, setModalTitle] = createSignal("");
+
+const handleModalClose = () => {
+  let isModalOpen = (false);
+  regenerateBackend(); // <-- your custom function
+};
 </script>
 
 
