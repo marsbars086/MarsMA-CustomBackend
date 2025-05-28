@@ -23,11 +23,8 @@
       getFamilies();
     });
 
-    const deleteFamily = async (lastname) => {
-    const res = await fetch(`http://localhost:3000/deleteFamily/${lastname}`, {
-      method: 'DELETE',
-    });
-    getFamilies()
+    const promptingdeleteFamily = async (lastname) => {
+      modals.open(MyModal, {title:"Are you sure you want to delete this family?", message:lastname})
   }
 
   let newFamily = $state(
@@ -53,33 +50,33 @@
     getFamilies();
   };
 
-  const addNewPerson = async (familyname) => {
-    console.log(familyname)
-    console.log($state.snapshot(newPerson))
-    const res = await fetch(`http://localhost:3000/createpersonbody/${familyname}`, {
-      method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newPerson)
-    });
+//   const addNewPerson = async (familyname) => {
+//     console.log(familyname)
+//     console.log($state.snapshot(newPerson))
+//     const res = await fetch(`http://localhost:3000/createpersonbody/${familyname}`, {
+//       method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(newPerson)
+//     });
 
-    const result = await res.json();
-    console.log(result);
-    getPeople();
-    getFamilies();
+//     const result = await res.json();
+//     console.log(result);
+//     getPeople();
+//     getFamilies();
 
 
-  let selectedPerson = null;
+//   let selectedPerson = null;
 
-// function openModal(person) {
-//   selectedPerson = person;
-// }
+// // function openModal(person) {
+// //   selectedPerson = person;
+// // }
 
-// function closeModal() {
-//   selectedPerson = null;
-// }
-  };
+// // function closeModal() {
+// //   selectedPerson = null;
+// // }
+//   };
 
   import Sidebar from './Sidebar.svelte';
   let sidebar_show = $state(false);
@@ -139,11 +136,11 @@
 <details open>
     <summary> 
       {item.last_name} Family 
-      <button onclick={()=> deleteFamily(item.last_name)}>Delete</button>
+      <button onclick={()=> promptingdeleteFamily(item.last_name)}>Delete</button>
       <button onclick={(event)=> handleModalClick(event, "Update Family", item)}>...</button>
     </summary>
     <li>{item.culture} </li>
-    <li><button onclick={(event)=> handleModalClick(event, "Create Person", item)}>Add New Member</button></li>
+    <li><button onclick={(event)=> handleModalClick(event, "Create Person", item)}>Add New Member</button>
     <li>Members:</li>
 <ul>
   <div class="MemberinFamilyDisplay">
@@ -168,13 +165,13 @@
 </div>
 
 
-<h1>add new person</h1>
+<!-- <h1>add new person</h1>
 <input bind:value={newPerson.first_name} placeholder="Hayes"/>
 <input bind:value={newPerson.last_name} placeholder="Resser"/>
 <input bind:value={personsFamilyname} placeholder="Resser"/>
 <input type="number" bind:value={newPerson.age}/>
 
-<button onclick={()=>addNewPerson(personsFamilyname)}>submit</button>
+<button onclick={()=>addNewPerson(personsFamilyname)}>submit</button> -->
 
 <!-- {#if selectedPerson}
   <Sidepanel person={selectedPerson} onClose={closeModal} />
@@ -186,7 +183,8 @@
 <Modals>
   <!-- shown when any modal is opened -->
   {#snippet backdrop({ close })}
-    <div class="backdrop" onclick={() => close()} />
+    <!-- <div class="backdrop" onclick={() => close()} /> -->
+      <button class="backdrop" onclick={() => close()} >backdrop</button>
   {/snippet}
 </Modals>
 
@@ -259,5 +257,6 @@ summary {
     right: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
+    color:transparent;
   }
 </style>

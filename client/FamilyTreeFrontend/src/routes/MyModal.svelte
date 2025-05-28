@@ -30,6 +30,14 @@
     close()
   };
 
+  const deleteFamily = async (lastname) => {
+    const res = await fetch(`http://localhost:3000/deleteFamily/${lastname}`, {
+      method: 'DELETE',
+    });
+    close()
+    // getFamilies()
+  }
+
   let newPerson = $state(
     {first_name:"", last_name:"",age:0}
   )
@@ -71,7 +79,7 @@
 
       </div>
     </div>
-    {:else}
+    {:else if title == "Create Person"}
     <div role="dialog" class="modal" style="top: {position?.top}px; left: {position?.left}px;">
       <div class="contents">
         <h2>{title}</h2>
@@ -85,6 +93,18 @@
 
         <div class="actions">
           <button onclick={() => close()}>OK</button>
+        </div>
+      </div>
+    </div>
+    {:else if title == "Are you sure you want to delete this family?"}
+    <div role="dialog" class="modalfixed">
+      <div class="contents">
+        <h2>{title}</h2>
+        <p>members wont be deleted</p>
+
+        <div class="actions">
+          <button onclick={() => close()}>Cancel</button>
+          <button onclick={() => deleteFamily(message)}>Delete Family</button>
         </div>
       </div>
     </div>
@@ -106,6 +126,17 @@
   
       /* allow click-through to backdrop */
       pointer-events: none;
+    }
+    .modalfixed {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   
     .contents {
