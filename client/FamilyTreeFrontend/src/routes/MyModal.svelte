@@ -42,7 +42,7 @@
     {first_name:"", last_name:"",age:0}
   )
   
-  let personsFamilyname = $state("")
+  let personsFamilyname = $state(message.last_name)
 
   const addNewPerson = async (familyname) => {
     console.log(familyname)
@@ -57,6 +57,7 @@
 
     const result = await res.json();
     console.log(result);
+    close()
 
   };
   </script>
@@ -83,10 +84,13 @@
     <div role="dialog" class="modal" style="top: {position?.top}px; left: {position?.left}px;">
       <div class="contents">
         <h2>{title}</h2>
-
+        <label for input>First Name</label>
         <input bind:value={newPerson.first_name} placeholder="Hayes"/>
+        <label for input>Last Name</label>
         <input bind:value={newPerson.last_name} placeholder="Resser"/>
+        <label for input>Family</label>
         <input bind:value={personsFamilyname} placeholder="Resser"/>
+        <label for input>Age</label>
         <input type="number" bind:value={newPerson.age}/>
 
         <button onclick={()=>addNewPerson(personsFamilyname)}>submit</button>
