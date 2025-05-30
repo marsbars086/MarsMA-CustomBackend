@@ -53,6 +53,7 @@
     const result = await res.json();
     console.log(result);
     getFamilies();
+    newFamily = {name: "", culture: ""}
   };
 
 //   const addNewPerson = async (familyname) => {
