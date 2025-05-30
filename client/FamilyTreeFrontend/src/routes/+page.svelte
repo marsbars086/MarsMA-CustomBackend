@@ -159,7 +159,7 @@ const handleModalClose = () => {
 <details open>
     <summary> 
       {item.last_name} Family 
-      <button onclick={()=> promptingdeleteFamily(item.last_name)}>Delete</button>
+      <button onclick={(event)=> handleModalClick(event, "Are you sure you want to delete this family?", item.last_name)}>Delete</button>
       <button onclick={(event)=> handleModalClick(event, "Update Family", item)}>...</button>
     </summary>
     <li>{item.culture} </li>
