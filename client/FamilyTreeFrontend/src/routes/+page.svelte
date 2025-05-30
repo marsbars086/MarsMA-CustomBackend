@@ -100,7 +100,15 @@
 
   function handleSidebar(member){
     if(sidebar_show) {
-      closeSidebar()
+      console.log("newpersonclicked")
+      console.log($state.snapshot(member._id))
+      console.log("this is sidebarperson")
+      console.log($state.snapshot(selectedPerson._id))
+      if ($state.snapshot(member._id) === $state.snapshot(selectedPerson._id)){
+        closeSidebar()
+      } else {
+        openSidebar(member)
+      }
     } else {
       openSidebar(member)
     }
