@@ -1,10 +1,8 @@
 <script>
     import { STATES } from 'mongoose';
     import { onMount } from 'svelte';
-    import Sidepanel from './sidebar.svelte';
-    import { Modals } from 'svelte-modals';
-    import {modals} from 'svelte-modals';
-    import MyModal from './MyModal.svelte';
+    // import { Modals } from 'svelte-modals';
+    // import {modals} from 'svelte-modals';
     let people = $state([]);
     let families = $state([]);
 
@@ -31,7 +29,7 @@
 
 
     const promptingdeleteFamily = async (lastname) => {
-      modals.open(MyModal, {title:"Are you sure you want to delete this family?", message:lastname})
+      // modals.open(MyModal, {title:"Are you sure you want to delete this family?", message:lastname})
   }
 
   let newFamily = $state(
@@ -99,6 +97,12 @@
     regenerateBackend()
     sidebar_show = false
   }
+  import MyModal from './MyModal.svelte';
+  let modalVariable = $state(
+    {title: "", message: "", position: null}
+  )
+
+  let isModalOpen = $state(false)
 
   function handleModalClick(event, mytitle, mymessage) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -106,16 +110,19 @@
       top: rect.top + window.scrollY - 183,
       left: rect.left + window.scrollX,
     };
-    let isModalOpen = (true);
-    modals.open(MyModal, { isOpen: $state.snapshot(isModalOpen), customclose:handleModalClose(), title: mytitle, message: mymessage , position})
+    modalVariable.title = mytitle
+    modalVariable.message = mymessage
+    modalVariable.position=position
+    console.log("here??")
+    console.log($state.snapshot(modalVariable))
+    isModalOpen = (true);
   }
 
-  let isModalOpen = $state(false)
 //   const [isModalOpen, setModalOpen] = createSignal(false);
 // // const [modalTitle, setModalTitle] = createSignal("");
 
 const handleModalClose = () => {
-  let isModalOpen = (false);
+  isModalOpen = (false);
   regenerateBackend(); // <-- your custom function
 };
 </script>
@@ -180,6 +187,13 @@ const handleModalClose = () => {
 
 </div>
 
+<MyModal
+  show={isModalOpen}
+  close={()=>handleModalClose()}
+  title={modalVariable.title}
+  message={modalVariable.message}
+  position={modalVariable.position}
+/>
 
 <!-- <h1>add new person</h1>
 <input bind:value={newPerson.first_name} placeholder="Hayes"/>
@@ -196,13 +210,13 @@ const handleModalClose = () => {
 
 <!-- <Sidebar bind:show={sidebar_show} /> -->
 
-<Modals>
+<!-- <Modals> -->
   <!-- shown when any modal is opened -->
-  {#snippet backdrop({ close })}
+  <!-- {#snippet backdrop({ close })} -->
     <!-- <div class="backdrop" onclick={() => close()} /> -->
-      <button class="backdrop" onclick={() => close()} >backdrop</button>
+      <!-- <button class="backdrop" onclick={() => close()} >backdrop</button>
   {/snippet}
-</Modals>
+</Modals> -->
 
 <!-- </div> -->
 
@@ -266,7 +280,7 @@ summary {
 .IconforMember:hover{
   box-shadow: 10px 10px 20px rgba(36, 36, 36,0.5);
 }
-.backdrop {
+/* .backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -274,5 +288,5 @@ summary {
     left: 0;
     background: rgba(0, 0, 0, 0.5);
     color:transparent;
-  }
+  } */
 </style>
