@@ -76,7 +76,7 @@
           <label for input>Last Name</label>
           <input bind:value={newPerson.last_name} placeholder="Resser" />
           <label for input>Family</label>
-          <input bind:value={personsFamilyname} placeholder="Resser" />
+          <input value={personsFamilyname} placeholder="Resser" readonly/>
           <label for input>Age</label>
           <input type="number" bind:value={newPerson.age} />
   
