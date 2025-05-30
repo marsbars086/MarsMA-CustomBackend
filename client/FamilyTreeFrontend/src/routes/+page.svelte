@@ -97,6 +97,14 @@
     regenerateBackend()
     sidebar_show = false
   }
+
+  function handleSidebar(member){
+    if(sidebar_show) {
+      closeSidebar()
+    } else {
+      openSidebar(member)
+    }
+  }
   import MyModal from './MyModal.svelte';
   let modalVariable = $state(
     {title: "", message: "", position: null}
@@ -137,13 +145,13 @@ const handleModalClose = () => {
 
 
 <!-- <div class="layout-container"> -->
-<h1>Welcome to SvelteKit</h1>
+<!-- <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
 
 <h1>People</h1>
 {#each people as item}
 <li>{item.first_name} - {item.last_name} </li>
-{/each}
+{/each} -->
 
 <h1>Families</h1>
 
@@ -168,7 +176,8 @@ const handleModalClose = () => {
 <ul>
   <div class="MemberinFamilyDisplay">
   {#each item.members as member}
-    <button class="IconforMember" onclick={() => openSidebar(member)}>{member.first_name}</button>
+    <!-- <button class="IconforMember" onclick={() => openSidebar(member)}>{member.first_name}</button> -->
+    <button class="IconforMember" onclick={() => handleSidebar(member)}>{member.first_name}</button>
     <!-- <label for button>{member.first_name}</label> -->
   {/each}
 </div>
@@ -198,7 +207,6 @@ const handleModalClose = () => {
   message={modalVariable.message}
   position={modalVariable.position}
 />
-
 
 <!-- <h1>add new person</h1>
 <input bind:value={newPerson.first_name} placeholder="Hayes"/>
