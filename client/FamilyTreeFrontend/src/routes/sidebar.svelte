@@ -55,6 +55,6 @@ nav {
   border-left: 1px solid #aaa;
   background: #fff;
   overflow-y: auto;
-	width: 40rem;
+	width: 70rem;
 }
 </style>
