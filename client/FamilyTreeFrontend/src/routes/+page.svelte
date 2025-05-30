@@ -187,6 +187,10 @@ const handleModalClose = () => {
 
 </div>
 
+{#if isModalOpen}
+<button class="backdrop" onclick={() => handleModalClose()}>.</button>
+{/if}
+
 <MyModal
   show={isModalOpen}
   close={()=>handleModalClose()}
@@ -194,6 +198,7 @@ const handleModalClose = () => {
   message={modalVariable.message}
   position={modalVariable.position}
 />
+
 
 <!-- <h1>add new person</h1>
 <input bind:value={newPerson.first_name} placeholder="Hayes"/>
@@ -280,7 +285,7 @@ summary {
 .IconforMember:hover{
   box-shadow: 10px 10px 20px rgba(36, 36, 36,0.5);
 }
-/* .backdrop {
+.backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -288,5 +293,5 @@ summary {
     left: 0;
     background: rgba(0, 0, 0, 0.5);
     color:transparent;
-  } */
+  }
 </style>
