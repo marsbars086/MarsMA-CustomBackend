@@ -138,8 +138,9 @@
 // // const [modalTitle, setModalTitle] = createSignal("");
 
 const handleModalClose = () => {
-  isModalOpen = (false);
+
   regenerateBackend(); // <-- your custom function
+  isModalOpen = (false);
 };
 </script>
 
@@ -167,8 +168,6 @@ const handleModalClose = () => {
 <input bind:value={newFamily.name} placeholder="Resser"/>
 <input bind:value={newFamily.culture} placeholder="African"/>
 <button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
-<!-- <button onclick={(event)=> handleModalClick(event, "UpdateFamily", "Hiiii")}>openmodalfamily</button> -->
-<button onclick={(event)=> handleModalClick(event, "yo","hii")}>openmodalrandom</button>
 <div class="MainFamilyDisplay">
 <div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
 {#each families as item}
