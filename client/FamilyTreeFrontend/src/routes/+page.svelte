@@ -18,7 +18,7 @@
 
 
     function regenerateBackend(){
-      console.log("i regenerated")
+      // console.log("i regenerated")
       getPeople();
       getFamilies();
     }
@@ -166,8 +166,8 @@ const handleModalClose = () => {
 <h1>Families</h1>
 
 <h1>add new family</h1>
-<input bind:value={newFamily.name} placeholder="Resser"/>
-<input bind:value={newFamily.culture} placeholder="African"/>
+<input bind:value={newFamily.name} placeholder="Last Name"/>
+<input bind:value={newFamily.culture} placeholder="Culture/Ethnicity"/>
 <button onclick={()=>addNewFamily (newFamily.name,newFamily.culture)}>+</button>
 <div class="MainFamilyDisplay">
 <div class = "DisplayFamilyContainers" class:with-sidebar={sidebar_show}>
